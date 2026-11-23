@@ -6,7 +6,7 @@ import { ToastProvider } from './context/store.jsx';
 import { startDataSource } from './services/api.js';
 import './index.css';
 
-// Live mode: resume the sign-in and connect. Demo mode: start the in-browser simulator.
+// Resume the previous sign-in, if any, and connect to the server.
 startDataSource();
 
 createRoot(document.getElementById('root')).render(

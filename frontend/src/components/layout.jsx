@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate, Link } from 'react-router-dom';
 import {
   LayoutDashboard, Zap, PlugZap, MapPin, Layers, Tag, Gauge, Terminal, History, Bell, BarChart3,
-  Users, ScrollText, Settings, Search, Menu, X, LogOut, FlaskConical,
+  Users, ScrollText, Settings, Search, Menu, X, LogOut,
 } from 'lucide-react';
-import { api, LIVE } from '../services/api.js';
+import { api } from '../services/api.js';
 import { useStore, useAuth, useAction } from '../context/store.jsx';
 import { ErrorBoundary } from './ui.jsx';
 
@@ -82,7 +82,7 @@ function Sidebar({ onNavigate }) {
           );
         })}
       </nav>
-      <div className="border-t border-slate-800 px-4 py-3 text-[11px] text-slate-500">{LIVE ? `${state.chargers.filter((c) => c.online).length} of ${state.chargers.length} chargers connected` : 'Demo mode · simulated data'}</div>
+      <div className="border-t border-slate-800 px-4 py-3 text-[11px] text-slate-500">{`${state.chargers.filter((c) => c.online).length} of ${state.chargers.length} chargers connected`}</div>
     </div>
   );
 }
@@ -161,12 +161,7 @@ export function AppLayout() {
           </div>
         </header>
 
-        {!LIVE ? (
-          <div className="flex shrink-0 items-center gap-2 border-b border-amber-200 bg-amber-50 px-4 py-1.5 text-xs text-amber-900">
-            <FlaskConical className="h-3.5 w-3.5 shrink-0" />
-            <span><strong>Demo mode: simulated data.</strong> No server and no physical charger is connected. Everything on every page comes from the built-in simulator.</span>
-          </div>
-        ) : connection !== 'live' ? (
+        {connection !== 'live' ? (
           <div className="flex shrink-0 items-center gap-2 border-b border-amber-200 bg-amber-50 px-4 py-1.5 text-xs text-amber-900" role="status">
             <span><strong>Live updates interrupted.</strong> Reconnecting to the server; the page refreshes every 15 seconds meanwhile, so what you see may be slightly behind.</span>
           </div>

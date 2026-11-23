@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Download, BarChart3 } from 'lucide-react';
 import { useStore } from '../context/store.jsx';
 import { DATA_SOURCE } from '../services/api.js';
-import { Button, Card, CardHeader, PageHeader, Select, Field, StatCard, TableWrap, EmptyState, SimTag } from '../components/ui.jsx';
+import { Button, Card, CardHeader, PageHeader, Select, Field, StatCard, TableWrap, EmptyState } from '../components/ui.jsx';
 import { DailyChart, HorizontalBars } from '../components/charts.jsx';
 import { byId, dailySeries } from '../lib/selectors.js';
 import { dayKey, shortDay, downloadCsv, fmtKwh, fmtMoney, fmtNumber, fmtDuration } from '../lib/format.js';
@@ -68,7 +68,7 @@ export default function Reports() {
 
   return (
     <div>
-      <PageHeader title="Reports" subtitle="Energy, sessions and revenue for any period" actions={<><SimTag /><Button icon={Download} onClick={exportCsv} disabled={!rows.length}>Export CSV</Button></>} />
+      <PageHeader title="Reports" subtitle="Energy, sessions and revenue for any period" actions={<><Button icon={Download} onClick={exportCsv} disabled={!rows.length}>Export CSV</Button></>} />
 
       <Card className="mb-4">
         <div className="grid gap-3 p-3 sm:grid-cols-2 lg:grid-cols-5">

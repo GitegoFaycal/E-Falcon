@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { RotateCcw, Ban, Terminal, History, Bell, Check, CheckCircle2 } from 'lucide-react';
 import { api } from '../services/api.js';
 import { useStore, useAuth, useAction } from '../context/store.jsx';
-import { Button, TableWrap, CommandBadge, SeverityBadge, Tone, EmptyState, Modal, KeyValue, Pagination, usePaged, SimTag, Field } from './ui.jsx';
+import { Button, TableWrap, CommandBadge, SeverityBadge, Tone, EmptyState, Modal, KeyValue, Pagination, usePaged, Field } from './ui.jsx';
 import { byId, connectorLabel } from '../lib/selectors.js';
 import { ALERT_TYPES } from '../lib/status.js';
 import { fmtDateTime, fmtDateTimeFull, fmtDuration, fmtKwh, fmtMoney, timeAgo } from '../lib/format.js';
@@ -63,7 +63,7 @@ export function CommandTable({ commands, showCharger = true, pageSize = 12 }) {
       <Modal open={Boolean(open)} onClose={() => setOpenId(null)} wide title={open ? `${open.type} · ${open.id}` : ''} footer={<Button variant="primary" onClick={() => setOpenId(null)}>Close</Button>}>
         {open ? (
           <div className="space-y-4">
-            <div className="flex flex-wrap gap-2"><CommandBadge status={open.status} /><SimTag /></div>
+            <div className="flex flex-wrap gap-2"><CommandBadge status={open.status} /></div>
             <KeyValue items={[
               ['Charger', (byId(state.chargers, open.chargerId) || {}).name || open.chargerId],
               ['Connector', open.connectorId ? connectorLabel(state, open.connectorId) : 'Whole charger'],

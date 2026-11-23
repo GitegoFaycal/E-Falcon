@@ -3,7 +3,7 @@ import { CheckCircle2, XCircle, Info, X } from 'lucide-react';
 import { subscribe, getVersion, getState, getCurrentUser, onEvent, getStatus, getConnection } from '../services/api.js';
 import { hasPerm } from '../lib/permissions.js';
 
-// Live view of the store. The simulator mutates state in place and bumps a version number;
+// Live view of the store. The data layer updates state and bumps a version number;
 // subscribing to the version re-renders the caller on every change.
 export function useStore() {
   useSyncExternalStore(subscribe, getVersion, getVersion);

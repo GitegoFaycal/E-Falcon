@@ -1,11 +1,12 @@
-// LIVE MODE: the dashboard against the real E-Falcon server.
+// The dashboard's connection to the E-Falcon server.
 //   - REST calls with Axios (short-lived access token in memory, refresh token in an httpOnly cookie)
 //   - one snapshot on sign-in, then row-level "patch" events over Socket.IO
-// The store has the same shape as the simulator's, so pages do not know which one they use.
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-const BASE = String(import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+// Server address. Set VITE_API_URL for a deployed dashboard. While developing (npm run dev) it
+// defaults to the server on this computer, so no .env file is needed locally.
+export const BASE = String(import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:4000' : '')).replace(/\/$/, '');
 const NEWEST_FIRST = ['pricingAssignments', 'pricingDeployments', 'sessions', 'commands', 'events', 'alerts', 'audit', 'scheduledOps'];
 const LISTS = ['users', 'locations', 'groups', 'chargers', 'connectors', 'pricingRules', ...NEWEST_FIRST];
 
@@ -18,7 +19,7 @@ let state = empty();
 let me = null;
 let token = null;
 let version = 0;
-let status = 'loading'; // loading | signed_out | ready
+let status = 'loading'; // loading | unconfigured | signed_out | ready
 let connection = 'offline'; // live | reconnecting | offline
 let socket = null;
 let refreshing = null;
@@ -118,6 +119,7 @@ async function enter() {
 
 // Called once at start-up: resume the previous sign-in if the refresh cookie is still valid.
 export async function boot() {
+  if (!BASE) { status = 'unconfigured'; commit(); return; }
   try { await refresh(); await enter(); } catch { status = 'signed_out'; commit(); }
 }
 

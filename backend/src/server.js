@@ -8,6 +8,7 @@ import { createGateway, createTransport } from './ocpp/gateway.js';
 import { createAuth } from './http/auth.js';
 import { createApp } from './http/app.js';
 import { createHub } from './realtime/hub.js';
+import { createAdmin } from './setup.js';
 
 const log = (...args) => console.log(new Date().toISOString(), ...args);
 
@@ -17,6 +18,12 @@ export async function start(env = process.env) {
   await migrate(db, log);
   const transport = createTransport();
   const core = await createCore({ db, transport, log });
+  // First-run bootstrap for hosts without a shell (e.g. Render's free plan): if the database has
+  // no users and ADMIN_EMAIL + ADMIN_PASSWORD are set, create that administrator once.
+  if (!core.state.users.length && env.ADMIN_EMAIL && env.ADMIN_PASSWORD) {
+    const admin = await createAdmin(core, { name: env.ADMIN_NAME || 'Administrator', email: env.ADMIN_EMAIL, password: env.ADMIN_PASSWORD });
+    log(`First administrator created from ADMIN_EMAIL: ${admin.email}. Remove ADMIN_PASSWORD from the environment now.`);
+  }
   const gateway = createGateway({ core, transport, requireAuth: config.ocppRequireAuth, log });
   const auth = createAuth({ core, db, config });
   const app = createApp({ core, auth, config, gateway, log });

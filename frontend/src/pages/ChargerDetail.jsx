@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Pencil, Trash2, RefreshCw, Settings, Wifi, WifiOff, FlaskConical, Tag, Power, PowerOff, Lock } from 'lucide-react';
-import { api, LIVE, ocppEndpoint } from '../services/api.js';
+import { ArrowLeft, Pencil, Trash2, RefreshCw, Settings, Wifi, WifiOff, Tag, Power, PowerOff, Lock } from 'lucide-react';
+import { api, ocppEndpoint } from '../services/api.js';
 import { useStore, useAuth, useAction } from '../context/store.jsx';
 import { Button, Card, CardHeader, PageHeader, StatusBadge, KeyValue, CapabilityBadge, Tabs, EmptyState, ConfirmDialog, Notice, Tone, Modal } from '../components/ui.jsx';
 import { ConnectorCard, AvailabilityDialog, AssignPricingDialog } from '../components/ops.jsx';
@@ -217,20 +217,7 @@ export default function ChargerDetail() {
         ) : null}
       </Card>
 
-      {LIVE ? <OcppAccess charger={ch} /> : (
-      <Card className="mt-4 border-amber-200">
-        <CardHeader title={<span className="flex items-center gap-2"><FlaskConical className="h-4 w-4 text-amber-700" />Simulator controls</span>} subtitle="Development only. These act on the simulated charger, not on the CMS, and do not exist in production." />
-        <div className="flex flex-wrap gap-2 p-4">
-          <Button size="sm" busy={busy} onClick={() => run(() => api.simSetOnline(ch.id, !ch.online))}>{ch.online ? 'Drop connection' : 'Connect charger'}</Button>
-          {conns.map((c) => (
-            <span key={c.id} className="flex flex-wrap gap-2">
-              <Button size="sm" busy={busy} disabled={!ch.online} onClick={() => run(() => api.simPlug(c.id))}>{c.label}: {c.sessionId ? 'unplug vehicle' : 'plug in vehicle'}</Button>
-              <Button size="sm" busy={busy} disabled={!ch.online} onClick={() => run(() => api.simFault(c.id, c.status !== 'Faulted'))}>{c.label}: {c.status === 'Faulted' ? 'clear fault' : 'trigger fault'}</Button>
-            </span>
-          ))}
-        </div>
-      </Card>
-      )}
+      <OcppAccess charger={ch} />
 
       <ChargerFormModal open={edit} onClose={() => setEdit(false)} charger={ch} />
       <AvailabilityDialog open={dialog === 'enable' || dialog === 'restrict'} onClose={() => setDialog(null)} connectorIds={conns.map((c) => c.id)} action={dialog === 'enable' ? 'enable' : 'restrict'} />

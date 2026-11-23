@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Plus, Pencil } from 'lucide-react';
-import { api, LIVE } from '../services/api.js';
+import { api } from '../services/api.js';
 import { useStore, useAuth, useAction } from '../context/store.jsx';
-import { Button, Card, CardHeader, PageHeader, Modal, Field, Select, TableWrap, Tone, Checkbox, Notice } from '../components/ui.jsx';
+import { Button, Card, CardHeader, PageHeader, Modal, Field, Select, TableWrap, Tone, Checkbox } from '../components/ui.jsx';
 import { PERMISSIONS, ROLES, hasPerm } from '../lib/permissions.js';
 import { fmtDateTime } from '../lib/format.js';
 
@@ -33,11 +33,9 @@ function UserModal({ open, onClose, user }) {
         <Field label="Email"><input type="email" className="input" value={f.email} onChange={set('email')} required maxLength={120} /></Field>
         <Field label="Role"><Select value={f.role} onChange={set('role')} options={ROLES.map((r) => ({ value: r.key, label: r.label }))} /></Field>
         {user ? <label className="flex items-center gap-2 text-sm text-slate-700"><Checkbox checked={f.active} onChange={set('active')} label="Active" />Account is active (deactivated users cannot sign in)</label> : null}
-        {LIVE ? (
-          <Field label={user ? 'New password (leave empty to keep the current one)' : 'Initial password'} hint="At least 10 characters. Only a salted hash is stored. Setting a new password signs the user out everywhere.">
-            <input type="password" className="input" value={f.password} onChange={set('password')} autoComplete="new-password" minLength={10} required={!user} />
-          </Field>
-        ) : <Notice tone="gray">Demo mode has no passwords. With the server connected, an administrator sets each user&apos;s initial password here.</Notice>}
+        <Field label={user ? 'New password (leave empty to keep the current one)' : 'Initial password'} hint="At least 10 characters. Only a salted hash is stored. Setting a new password signs the user out everywhere.">
+          <input type="password" className="input" value={f.password} onChange={set('password')} autoComplete="new-password" minLength={10} required={!user} />
+        </Field>
       </form>
     </Modal>
   );

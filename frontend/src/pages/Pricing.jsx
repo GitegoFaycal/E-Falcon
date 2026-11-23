@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Plus, Pencil, Trash2, Tag, X, CalendarClock, Info } from 'lucide-react';
 import { api } from '../services/api.js';
 import { useStore, useAuth, useAction, useToast } from '../context/store.jsx';
-import { Button, Card, CardHeader, PageHeader, Modal, Field, Select, EmptyState, ConfirmDialog, Tabs, TableWrap, Tone, StageBadge, Notice, Checkbox, Pagination, usePaged, SimTag } from '../components/ui.jsx';
+import { Button, Card, CardHeader, PageHeader, Modal, Field, Select, EmptyState, ConfirmDialog, Tabs, TableWrap, Tone, StageBadge, Notice, Checkbox, Pagination, usePaged } from '../components/ui.jsx';
 import { AssignPricingDialog } from '../components/ops.jsx';
 import { PriceTrack, priceTrack } from '../components/PriceTrack.jsx';
 import { byId, resolvePricing, connectorLabel } from '../lib/selectors.js';
@@ -284,7 +284,7 @@ export default function Pricing() {
 
       {tab === 'status' ? (
         <Card>
-          <CardHeader title="Tariff on each charger" subtitle="Stored, sent, confirmed and applied are tracked separately" action={<SimTag />} />
+          <CardHeader title="Tariff on each charger" subtitle="Stored, sent, confirmed and applied are tracked separately" />
           <TableWrap>
             <thead className="bg-slate-50"><tr><th className="th">Charger</th><th className="th">Tariff (CMS)</th><th className="th">Price now</th><th className="th">Status</th><th className="th">Detail</th></tr></thead>
             <tbody className="divide-y divide-slate-100">

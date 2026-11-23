@@ -117,11 +117,9 @@ e-falcon/
 ├── README.md
 ├── docs/            ARCHITECTURE, DEPLOYMENT, HARDWARE_VERIFICATION, CHECKLIST
 ├── frontend/
-│   ├── tests/engine.test.js
 │   └── src/
-│       ├── services/api.js     chooses live server or demo simulator
+│       ├── services/api.js     the data-access seam used by every page
 │       ├── services/live.js    Axios + Socket.IO client, store fed by snapshot + patches
-│       ├── sim/                in-browser simulator (demo mode only)
 │       ├── lib/                rule files shared with the backend
 │       ├── context/, components/, pages/
 └── backend/

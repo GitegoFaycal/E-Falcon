@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Play, Square, Power, PowerOff, Wrench, Zap } from 'lucide-react';
 import { api } from '../services/api.js';
 import { useStore, useAuth, useAction } from '../context/store.jsx';
-import { Button, Modal, Field, Select, Tone, Notice, Checkbox, StatusBadge, ConfirmDialog, SimTag } from './ui.jsx';
+import { Button, Modal, Field, Select, Tone, Notice, Checkbox, StatusBadge, ConfirmDialog } from './ui.jsx';
 import { byId, limitSnapshot, resolvePricing, connectorLabel } from '../lib/selectors.js';
 import { connectorState, COMMAND_STATUS, DEPLOY_STAGE } from '../lib/status.js';
 import { rateAt } from '../lib/tariff.js';
@@ -52,7 +52,6 @@ export function ResultList({ rows }) {
     <div>
       <div className="mb-3 flex flex-wrap gap-2">
         {Object.entries(counts).map(([label, n]) => <Tone key={label} tone={tones[label]}>{n} {label}</Tone>)}
-        <SimTag />
       </div>
       <ul className="divide-y divide-slate-100 rounded-md border border-slate-200">
         {resolved.map((r, i) => (

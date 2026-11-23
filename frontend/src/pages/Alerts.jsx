@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../context/store.jsx';
-import { Card, PageHeader, Select, Tone, SimTag } from '../components/ui.jsx';
+import { Card, PageHeader, Select, Tone } from '../components/ui.jsx';
 import { AlertList } from '../components/tables.jsx';
 import { ALERT_TYPES, SEVERITY } from '../lib/status.js';
 
@@ -28,7 +28,6 @@ export default function Alerts() {
             <Tone tone={count('open') ? 'red' : 'gray'}>{count('open')} open</Tone>
             <Tone tone="amber">{count('acknowledged')} acknowledged</Tone>
             <Tone tone="green">{count('resolved')} resolved</Tone>
-            <SimTag />
           </>
         )}
       />

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Gauge, Power, PowerOff, CalendarClock, ShieldCheck } from 'lucide-react';
 import { api } from '../services/api.js';
 import { useStore, useAuth, useAction } from '../context/store.jsx';
-import { Button, Card, CardHeader, PageHeader, Field, Select, EmptyState, TableWrap, Tone, StatusBadge, Notice, Checkbox, Pagination, usePaged, Tabs, ConfirmDialog, SimTag } from '../components/ui.jsx';
+import { Button, Card, CardHeader, PageHeader, Field, Select, EmptyState, TableWrap, Tone, StatusBadge, Notice, Checkbox, Pagination, usePaged, Tabs, ConfirmDialog } from '../components/ui.jsx';
 import { AvailabilityDialog } from '../components/ops.jsx';
 import { byId, limitSnapshot, hasActiveCommand } from '../lib/selectors.js';
 import { connectorState, STATES } from '../lib/status.js';
@@ -114,7 +114,7 @@ export default function Limits() {
 
   return (
     <div>
-      <PageHeader title="Operational limit" subtitle="Control how many connectors may be enabled for charging" actions={<SimTag />} />
+      <PageHeader title="Operational limit" subtitle="Control how many connectors may be enabled for charging" />
 
       {snap.over > 0 ? (
         <div className="mb-4">

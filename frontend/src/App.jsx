@@ -35,6 +35,16 @@ export default function App() {
   if (status === 'loading') {
     return <div className="flex min-h-screen items-center justify-center bg-slate-900 text-sm text-slate-300" role="status">Connecting to the E-Falcon server…</div>;
   }
+  if (status === 'unconfigured') {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-900 p-6">
+        <div className="max-w-md rounded-xl bg-white p-6 text-sm text-slate-700 shadow-xl">
+          <h1 className="text-base font-semibold text-slate-900">Server address not configured</h1>
+          <p className="mt-2">This dashboard was built without <code>VITE_API_URL</code>, so it does not know where the E-Falcon server is. Set that variable to the server&apos;s address and build again.</p>
+        </div>
+      </div>
+    );
+  }
   if (!user) {
     return (
       <Routes>

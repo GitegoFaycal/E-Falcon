@@ -5,7 +5,6 @@
 ## Built
 
 - [x] Dashboard, chargers, charger detail, connectors, locations, groups, pricing, operational limit, commands, sessions, alerts, reports, users, audit log, settings
-- [x] Demo mode on an in-browser simulator, clearly labelled, for use without a server
 - [x] Server: REST API, authentication (scrypt, JWT access token, rotating refresh cookie), role permissions enforced in the engine
 - [x] Database schema with migrations; SQLite for development and tests
 - [x] OCPP 1.6J gateway: identity check, subprotocol check, per-charger keys, keep-alive, reconnect handling
@@ -18,7 +17,7 @@
 - [x] Audit log with before / after, append-only in the application
 - [x] Live updates: every persisted change pushed to dashboards as row patches; polling fallback when the socket drops
 - [x] Charger simulator speaking real OCPP, for development
-- [x] Tests: 13 backend (REST, engine, database, OCPP end to end), 14 frontend (simulator rules)
+- [x] Tests: 13 backend (REST, engine, database, OCPP end to end)
 
 ## Built, with a gap to close before production
 

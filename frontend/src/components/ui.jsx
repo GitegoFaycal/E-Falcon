@@ -1,8 +1,7 @@
 // Shared presentational building blocks. No data access in this file.
 import { Component, useEffect, useState } from 'react';
-import { Loader2, X, ChevronLeft, ChevronRight, AlertTriangle, FlaskConical } from 'lucide-react';
+import { Loader2, X, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
 import { STATES, COMMAND_STATUS, CAPABILITY, DEPLOY_STAGE, SEVERITY } from '../lib/status.js';
-import { LIVE } from '../services/api.js';
 
 const cx = (...parts) => parts.filter(Boolean).join(' ');
 
@@ -90,17 +89,6 @@ export function Tone({ tone = 'gray', children }) {
     red: 'bg-red-50 text-red-800 ring-red-600/20',
   };
   return <Pill className={map[tone]}>{children}</Pill>;
-}
-
-// Marks anything produced by the simulator rather than by hardware or a database.
-// Renders nothing in live mode.
-export function SimTag({ className }) {
-  if (LIVE) return null;
-  return (
-    <Pill className={cx('bg-amber-50 text-amber-900 ring-amber-600/30', className)} title="Produced by the built-in simulator, not by a physical charger">
-      <FlaskConical className="h-3 w-3" />Simulated
-    </Pill>
-  );
 }
 
 export function PageHeader({ title, subtitle, actions }) {

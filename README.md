@@ -6,7 +6,7 @@ EV charging management system for DC charging stations: live monitoring, availab
 |---|---|
 | `frontend/` | React dashboard (Vite, Tailwind, React Router, Recharts, Axios, Socket.IO client) |
 | `backend/` | Node.js server: REST API (Express), real-time hub (Socket.IO), OCPP 1.6J gateway (WebSocket), database (SQLite for development, PostgreSQL for production) |
-| `backend/tools/charger-sim.js` | A simulated dual-gun charger that speaks real OCPP to the server, for development without hardware |
+| `backend/tools/charger-sim.js` | Optional developer tool: a pretend charger that connects to the server over OCPP. It only runs if you start it, and is not part of the dashboard |
 | `docs/` | Architecture, deployment, hardware verification checklist, status checklist |
 
 **No physical charger has been connected to this system yet.** Everything about real hardware (OCPP version, which commands the firmware accepts, whether a tariff can be set remotely) is still to be verified; see `docs/HARDWARE_VERIFICATION.md`. Read "What was and was not tested" at the end before relying on it.
@@ -31,20 +31,17 @@ npm run charger-sim -- --ids EF-SIM-001,EF-SIM-002,EF-SIM-003 --auto
 # 3. Dashboard (third terminal)
 cd frontend
 npm install
-echo "VITE_API_URL=http://localhost:4000" > .env
 npm run dev           # http://localhost:5173, sign in with the admin account from step 1
+                      # (uses the server at http://localhost:4000 automatically; no .env needed locally)
 ```
 
 Tests:
 
 ```bash
 cd backend && npm test     # 13 tests: REST API, engine, database, OCPP with a simulated charger
-cd frontend && npm test    # 14 tests: the same rules in the in-browser simulator
 ```
 
-### Demo mode (no server)
-
-If `VITE_API_URL` is not set, the dashboard runs entirely in the browser on a built-in simulator with fictional data and three demo accounts. It is labelled "Demo mode" on every page. Useful for showing the interface; it controls nothing.
+The dashboard shows only what the server holds. There is no demo or simulated data in it: if it cannot reach the server it says so.
 
 ## Connecting a real charger
 

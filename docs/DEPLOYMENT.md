@@ -41,7 +41,7 @@ The photographed unit is currently configured with a plain `ws://` URL on port 9
 
 ## Dashboard on Vercel
 
-Import the repository, set **Root Directory** to `frontend`, and add the environment variable `VITE_API_URL=https://api.example.com`. `frontend/vercel.json` covers the build and the single-page-app rewrite. Without `VITE_API_URL` the deployment is the demo mode.
+Import the repository, set **Root Directory** to `frontend`, and add the environment variable `VITE_API_URL=https://api.example.com`. `frontend/vercel.json` covers the build and the single-page-app rewrite. Without `VITE_API_URL` a deployed dashboard shows a "server address not configured" message.
 
 ## Database
 

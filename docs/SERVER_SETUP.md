@@ -8,6 +8,8 @@ Goal: one small server on the internet that a physical charger can reach, so we 
  your computer: dashboard on localhost:5173 ──SSH tunnel to port 4000───┘
 ```
 
+> **Using Oracle Cloud's free tier?** Do `ORACLE_FREE_SERVER.md` first: it replaces step 1 here (Oracle logs in differently and must not use `ufw`) and lists the small changes to later steps.
+
 ## What you need
 
 - A VPS (virtual server) from any provider: **Ubuntu 24.04**, 1 CPU, 1 to 2 GB RAM, a **public IPv4 address**. Choose a region close to Rwanda if the provider offers one.

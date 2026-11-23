@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Download } from 'lucide-react';
 import { useStore } from '../context/store.jsx';
-import { DATA_SOURCE, LIVE } from '../services/api.js';
-import { Button, Card, PageHeader, Select, Field, SimTag, StatCard } from '../components/ui.jsx';
+import { DATA_SOURCE } from '../services/api.js';
+import { Button, Card, PageHeader, Select, Field, StatCard } from '../components/ui.jsx';
 import { SessionTable } from '../components/tables.jsx';
 import { byId, connectorsOf } from '../lib/selectors.js';
 import { dayKey, downloadCsv, fmtKwh, fmtMoney } from '../lib/format.js';
@@ -38,7 +38,7 @@ export default function Sessions() {
 
   return (
     <div>
-      <PageHeader title="Charging sessions" subtitle="Live and completed sessions" actions={<><SimTag /><Button icon={Download} onClick={exportCsv} disabled={!rows.length}>Export CSV</Button></>} />
+      <PageHeader title="Charging sessions" subtitle="Live and completed sessions" actions={<><Button icon={Download} onClick={exportCsv} disabled={!rows.length}>Export CSV</Button></>} />
 
       <div className="mb-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <StatCard label="Sessions" value={rows.length} sub="in this selection" />
@@ -57,7 +57,7 @@ export default function Sessions() {
           <Field label="Status"><Select value={status} onChange={setStatus} options={[{ value: '', label: 'All' }, { value: 'active', label: 'Charging' }, { value: 'completed', label: 'Completed' }, { value: 'failed', label: 'Failed' }]} /></Field>
         </div>
         <SessionTable sessions={rows} pageSize={15} />
-        <p className="border-t border-slate-100 px-4 py-2.5 text-xs text-slate-500">{LIVE ? 'Identifiers are the tag IDs reported by the charger.' : 'Identifiers are simulated tag IDs.'} No customer or payment data exists in this system. Cost is energy × the CMS tariff plus fees; it is not a payment record.</p>
+        <p className="border-t border-slate-100 px-4 py-2.5 text-xs text-slate-500">Identifiers are the tag IDs reported by the charger. No customer or payment data exists in this system. Cost is energy × the CMS tariff plus fees; it is not a payment record.</p>
       </Card>
     </div>
   );

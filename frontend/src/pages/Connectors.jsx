@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PlugZap } from 'lucide-react';
 import { useStore } from '../context/store.jsx';
-import { Card, PageHeader, Select, EmptyState, Pagination, usePaged, SimTag } from '../components/ui.jsx';
+import { Card, PageHeader, Select, EmptyState, Pagination, usePaged } from '../components/ui.jsx';
 import { ConnectorCard } from '../components/ops.jsx';
 import { byId, limitSnapshot } from '../lib/selectors.js';
 import { connectorState, STATES, STATE_ORDER } from '../lib/status.js';
@@ -27,7 +27,7 @@ export default function Connectors() {
 
   return (
     <div>
-      <PageHeader title="Connectors" subtitle={`${snap.total} connectors · ${snap.enabled} enabled of ${snap.max} allowed`} actions={<SimTag />} />
+      <PageHeader title="Connectors" subtitle={`${snap.total} connectors · ${snap.enabled} enabled of ${snap.max} allowed`} />
 
       <div className="mb-4 flex flex-wrap gap-2">
         {STATE_ORDER.map((k) => (

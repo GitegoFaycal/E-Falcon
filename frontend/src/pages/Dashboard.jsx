@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Zap, PlugZap, Wifi, WifiOff, CheckCircle2, BatteryCharging, AlertTriangle, Ban, Activity, Gauge, CircleDollarSign, BarChart3 } from 'lucide-react';
 import { useStore } from '../context/store.jsx';
-import { Card, CardHeader, PageHeader, StatCard, SeverityBadge, SimTag, EmptyState } from '../components/ui.jsx';
+import { Card, CardHeader, PageHeader, StatCard, SeverityBadge, EmptyState } from '../components/ui.jsx';
 import { DailyChart, HorizontalBars, StatusDistribution } from '../components/charts.jsx';
 import { networkSummary, dailySeries, utilisationByCharger, byId } from '../lib/selectors.js';
 import { STATE_ORDER } from '../lib/status.js';
@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <PageHeader title="Dashboard" subtitle="Network overview" actions={<SimTag />} />
+      <PageHeader title="Dashboard" subtitle="Network overview" />
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
         <StatCard label="Stations" value={s.stations} sub={`${s.total} connectors`} icon={Zap} />

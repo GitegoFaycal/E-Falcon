@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../context/store.jsx';
-import { Card, PageHeader, Select, SimTag, Tone } from '../components/ui.jsx';
+import { Card, PageHeader, Select, Tone } from '../components/ui.jsx';
 import { CommandTable } from '../components/tables.jsx';
 import { COMMAND_STATUS, ACTIVE_COMMAND_STATUSES } from '../lib/status.js';
 
@@ -23,7 +23,6 @@ export default function Commands() {
           <>
             <Tone tone="blue">{inFlight} in progress</Tone>
             <Tone tone={failed ? 'red' : 'gray'}>{failed} failed or timed out</Tone>
-            <SimTag />
           </>
         )}
       />
