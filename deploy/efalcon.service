@@ -1,0 +1,22 @@
+# systemd unit for the E-Falcon server.  Install as /etc/systemd/system/efalcon.service
+[Unit]
+Description=E-Falcon CMS server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=efalcon
+Group=efalcon
+WorkingDirectory=/opt/efalcon/backend
+ExecStart=/usr/bin/node --env-file=/opt/efalcon/backend/.env src/server.js
+Restart=always
+RestartSec=3
+# Hardening: the service can only write to its data directory.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/efalcon
+
+[Install]
+WantedBy=multi-user.target

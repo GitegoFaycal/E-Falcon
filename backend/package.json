@@ -1,0 +1,27 @@
+{
+  "name": "e-falcon-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "migrate": "node --env-file-if-exists=.env tools/migrate.js",
+    "seed": "node --env-file-if-exists=.env tools/seed.js",
+    "create-admin": "node --env-file-if-exists=.env tools/create-admin.js",
+    "charger-sim": "node --env-file-if-exists=.env tools/charger-sim.js",
+    "sync-shared": "sh tools/sync-shared.sh",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1",
+    "socket.io": "^4.8.1",
+    "ws": "^8.18.0"
+  }
+}
